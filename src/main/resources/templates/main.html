@@ -3,10 +3,107 @@
 <head>
   <meta charset="UTF-8">
   <title>main</title>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+
+    td {
+      width: 150px;
+      height: 150px;
+      text-align: center;
+      border: 1px solid #ccc;
+    }
+
+    td:hover {
+      background-color: #f2f2f2;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-login 성공 : <p th:text="${session.loginEmail}"></p>
+<p th:text="${session.loginEmail} + ' 님의 시간표'"></p>
+
+<div>
+  <label for="year">년:</label>
+  <input type="number" id="year" min="1950" max="2099" value="2023">
+  <label for="month">월:</label>
+  <input type="number" id="month" min="1" max="12" value="9">
+  <button onclick="generateCalendar()">조회</button>
+</div>
+<table>
+  <thead>
+  <tr>
+    <th>일</th>
+    <th>월</th>
+    <th>화</th>
+    <th>수</th>
+    <th>목</th>
+    <th>금</th>
+    <th>토</th>
+  </tr>
+  </thead>
+  <tbody id="calendar-body"></tbody>
+</table>
+<div id="selected-date">현재 날짜 </div>
+
+<script>
+  function generateCalendar() {
+    const year = document.getElementById("year").value;
+    const month = document.getElementById("month").value;
+    const calendarBody = document.getElementById("calendar-body");
+
+    calendarBody.innerHTML = "";
+
+    const firstDay = new Date(year, month - 1, 1);
+    const lastDay = new Date(year, month, 0);
+
+    let currentDate = new Date(firstDay);
+
+    while (currentDate <= lastDay) {
+      const cell = document.createElement("td");
+      const day = currentDate.getDate();
+
+      // 이 부분에서 각 일자를 키 값으로 가지는 객체를 생성하고 표시합니다.
+      const dayObject = {
+        date: day,
+        // 여기에 추가 정보를 저장할 수 있습니다.
+      };
+
+      cell.textContent = dayObject.date;
+
+      cell.addEventListener("mouseover", function() {
+        let scheduleTable = '<table>';
+        for(let i=0; i<4; i++) {
+          scheduleTable += '<tr>';
+          for(let j=0; j<6; j++) {
+            // 각 칸의 id 값을 '날짜-시작시간' 형식으로 설정합니다.
+            scheduleTable += `<td id="${day}-${i*4+j}" style="width:25px;height:25px;"></td>`;
+          }
+          scheduleTable += '</tr>';
+        }
+        scheduleTable += '</table>';
+
+        cell.innerHTML = dayObject.date + scheduleTable;
+      });
+      cell.addEventListener("mouseout", function() {
+        cell.textContent = dayObject.date;
+      });
+
+      calendarBody.appendChild(cell);
+
+      if (currentDate.getDay() === 6) {
+        calendarBody.appendChild(document.createElement("tr"));
+      }
+
+      currentDate.setDate(currentDate.getDate() + 1);
+
+    }
+
+    // 선택된 날짜 업데이트
+    const selectedDate = document.getElementById("selected-date");
+    selectedDate.textContent = `선택된 날짜: ${year}-${month}`;
+  }
+</script>
 </body>
 </html>
-
-<!-- main.html -->

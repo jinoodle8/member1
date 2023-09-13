@@ -3,15 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>TEST</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
 </head>
+<body style="color: #22334f; font-family: Gowun Dodum">
+<div style="background: #ebf2ff;">
+    메뉴
+</div>
+<div style="background: #233960;">
+    <h1 style="color: rgb(255, 255, 255); font-size: 70px; font-style: italic; text-align: center;">Weektime</h1>
+    <h3 style="color: rgb(238, 234, 255); line-height : 40px; font-size: 15px;  text-align: right;"> Weektime을 통해 시간표를 공유하실 수 있습니다.</h3>
+    &emsp;
+</div>
 
-<body>
-<h1>테스트에 오신 걸 환영합니다!</h1>
-<h3>로그인 또는 회원가입을 클릭하세요.</h3>
 
-<a href="/member/login">로그인</a>
-<a href="/member/save">회원가입</a>
-<a href="/member/">회원목록</a>
-
+<div style="text-align: center">
+    &emsp;
+    <form action="/member/login" method="post">
+        이메일 : <input type="text" name="memberEmail"> <br>
+        비밀번호 : <input type="password" name="memberPassword"> <br>
+        <input type="submit" value="로그인">
+    </form>
+    <a href="/member/save" style="color: #4e4a52; font-size: 30px;">회원가입</a>
+</div>
 </body>
 </html>
