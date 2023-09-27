@@ -89,6 +89,9 @@
       cell.addEventListener("mouseout", function() {
         cell.textContent = dayObject.date;
       });
+      cell.addEventListener("click", function() {
+        window.open("/member/time");
+      });
 
       calendarBody.appendChild(cell);
 
