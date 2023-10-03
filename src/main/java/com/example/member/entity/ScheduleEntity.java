@@ -1,26 +1,23 @@
 package com.example.member.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Setter
 @Getter
-@Table(name = "member_schedule") //database에 해당 이름의 테이블 생성
-public class ScheduleEntity { //table 역할
-    //jpa ==> database를 객체처럼 사용 가능
+@Setter
+public class ScheduleEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
-    private String MemberId;
+    private String memberId;
+    private String day;
+    private String schedule;
 
-    @Column
-    private String Day;
-
-    @Column
-    private String Schedule;
 }
